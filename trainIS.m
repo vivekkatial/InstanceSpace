@@ -1,4 +1,4 @@
-function model = trainIS(rootdir)
+function model = trainIS(rootdir,outdir)
 % -------------------------------------------------------------------------
 % trainIS.m
 % -------------------------------------------------------------------------
@@ -328,22 +328,22 @@ if opts.outputs.csv
     % Storing the output data as a CSV files. This is for easier
     % post-processing. All workspace data will be stored in a matlab file
     % later.
-    scriptcsv(model,rootdir);
+    scriptcsv(model,outdir);
     if opts.outputs.web
-        scriptweb(model,rootdir);
+        scriptweb(model,outdir);
     end
 end
 % -------------------------------------------------------------------------
 % Making all the plots. First, plotting the features and performance as
 % scatter plots.
 if opts.outputs.png
-    scriptpng(model,rootdir);
+    scriptpng(model,outdir);
 end
 % -------------------------------------------------------------------------
 disp('-------------------------------------------------------------------------');
 disp('-> Storing the raw MATLAB results for post-processing and/or debugging.');
-save([rootdir 'model.mat'],'-struct','model'); % Save the main results
-save([rootdir 'workspace.mat']); % Save the full workspace for debugging
+save([outdir 'model.mat'],'-struct','model'); % Save the main results
+save([outdir 'workspace.mat']); % Save the full workspace for debugging
 disp(['-> Completed! Elapsed time: ' num2str(toc(startProcess)) 's']);
 disp('EOF:SUCCESS');
 end
